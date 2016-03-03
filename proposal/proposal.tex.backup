@@ -1,0 +1,103 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+
+%opening
+\title{Risk Analysis of Skin Cancer using Deep Learning}
+\author{Matthew May, Stefano Fenu, Thanh Dang, Apurv Verma}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Skin cancer is the most common form of cancer, accounting for 40\% of cases globally.
+More than 8,500 people in the US are diagnosed with skin cancer everyday. Melanoma rates in the United States have doubled from 1982 to 2011.
+The survival rate of people with it depends on when they start treatment. The cure rate is very high
+with early prognosis. The curability is as high as 92\% if the cancer is detected early. The prognosis is less favorable 
+if it has spread to other parts of the body.
+Deep convolutional neural networks have led to new breakthroughs in image classification.
+Advancement in neural network frameworks and GPU based computing has allowed us to train deeper and deeper networks.
+We aim to exploit these advancements and apply it to the problem of early skin cancer detection.
+\end{abstract}
+
+\section{Problem Statement}
+To build a platform where dermatologists can easily scan through the cancer prone patients. The system uses deep learning
+techniques in the background to learn from thousands of images and associates a risk score with each lesion image. The value of the
+score can be used to differentiate between malign and benign cases.
+
+\section{Current Approaches/Survey}
+It is an unfortunate fact of the healthcare system that it spends more in research on expensive treatments for late-stage diseased individuals
+than developing scalable and cost-effective early screening methods. To the best of our knowledge, no one has attempted to build such a system.
+
+It is only recently that neural networks have been used for the problem of skin cancer classification. Much of the earlier work focussed
+on extracting features based on image processing techniques to do the classification. In \cite{DBLP:journals/eswa/LeeC15}, Lee and Chen use low
+level feature comparison for detecting different cancer types. In \cite{Kreutz2001}, the authors use a combination of neural networks and 
+sophisticated image processing and feature extraction techniques to achieve a fast and reliable diagnosis. They were able to obtain a 
+90\% correct classification of malignant and benign skin lesions from the DANAOS data collection. In \cite{Sheha_automaticdetection} the authors use 
+a multilayer perceptron to classify melanoma. 
+
+There have also been techniques like \cite{Gniadecka2004443}, \cite{Zhao:15} which combine spectroscopy data with neural networks. These techniques
+are only plausible in a lab setting with appropriate instruments. The novelty of our technique is that it relies solely on image data.
+These images can be captured by an individual using smartphones and does not require any specialized pathology skills. The user could get a reminder
+to upload the image to the website on a periodic basis and the dermatologist could monitor high risk patients easily using our system.\\
+The most recent work which is related to our current work was done by Andre, Kuprel and Sebastian Thrun at Stanford. \cite{esteva-skincancer-manuscript}.
+The approach used by them is an ensemble of 5 models (VGG16-1, VGG16-2, VGG16-3, VGG19-1, and VGG19-2) that classify among the 23 classes. We try to
+achieve a better accuracy over their model and also build a system for dermatologists to efficiently manage their patients.
+
+\section{Salient Features and Innovation}
+\begin{itemize}
+ \item A model which can work with images captured through webcams, smartphones or other day-to-day shops medical devices.
+ \item An interface for patients to upload their image periodically so the clinician can monitor the lesion outside the clinic
+ \item An interface for the clinician to view high risk patients at the top of their feed. The high risk patients are found out by passing the
+       uploaded image through the learnt network.
+ \item The system also displays similar lesions as to provide an explanation of why it considers the lesion to be of that particular kind.
+ \item Deep convolutional networks are the state of the art in image classification and get better and better with more training data. So
+ far we have tried AlexNet\cite{NIPS2012_4824}, GoogleNet\cite{43022} and are currently experimenting with ResNet\cite{DBLP:journals/corr/HeZRS15}.
+\end{itemize}
+
+\section{Users}
+The tool can be used by dermatologists and patients.
+
+\section{Impact}
+The tool provides a low cost, scalable approach to detect skin cancer early by empowering patients and dermatologists and providing
+efficient and timely detection. We are in talks with a couple of dermatologists and would incorporate their feedback in our design.
+Further, we will be using cross validation to measure the accurancy of our neural networks.\\
+If we are successful, we could reduce the thousands of death tolls to skin cancer each year. We also plan to host the
+website public and do beta testing by giving access to selective patients and health professionals.
+
+\section{Risks and Payoffs}
+\begin{itemize}
+ \item Uneasiness of adoption by dermatologists because of re-imbursement structure in healthcare. Dermatologists get paid every time a patient
+ walks in to their office.
+ \item Dermatologists also do not want to use more technology as they are already saturated with technologies.
+ \item Cold start problem: Lack of training data for a few classes initially, might cause the network to have bad classification accuracy for a
+ few classes. This might lead to dermatologists losing trust in the system.
+\end{itemize}
+
+\section{Costs and Timeline}
+The overall approach is very cost-effective. We rely completey on open source technologies like tensorflow\cite{tensorflow2015-whitepaper} and caffee\cite{jia2014caffe} for our building and training
+deep neural network. We use Ruby on Rails for building the web application which is also open source.Typical training and fine-tuning of parameters
+for the model would require ~100 hours of training time.  Amazon dedicated GPU instance
+typically cost ~\$0.65/hour
+\begin{itemize}
+ \item Explore and experiment various convolutional neural network models (1-2 months)
+ \item Build the web application (1-2 months). We plan to do these two steps in parallel
+ \item Final report and evaluation and gathering feedback. (2 weeks)
+\end{itemize}
+
+
+\section{Evaluation and Checkpoints}
+
+\begin{enumerate}
+ \item We aim to achieve an accuracy of 90\% for the binary classification case.
+ \item Build an end to end web application with user and clinician interfaces.
+ \item Build a service which can compute score for each uploaded image
+\end{enumerate}
+The tasks are split as follows among the team members. Stefano is mainly focussing on training the deep network. Thanh will be focussing on 
+building the UI and visualization component. Matthew will be focussing on the web application and Apurv would be focussing on data pre-processing
+and integrating the components.
+
+\bibliographystyle{abbrv}
+\bibliography{proposal}  % sigproc.bib is the name of the Bibliography in this case
+
+\end{document}

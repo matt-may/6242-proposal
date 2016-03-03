@@ -1,0 +1,511 @@
+\documentclass[14pt]{beamer}
+% \useoutertheme{miniframes}
+
+\usepackage{ngerman}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+% \usepackage{amsmath,amsfonts,amssymb}
+\usepackage{url}
+\usepackage{commath}
+
+% disable Navigation at the bottom
+\beamertemplatenavigationsymbolsempty
+
+% page numbers
+% \setbeamertemplate{footline}[frame number]
+% \setbeamertemplate{footline}
+\setbeamertemplate{headline}
+
+% style for source code
+\usepackage{listings}
+\newcommand{\Hilight}{\makebox[0pt][l]{\color{light-gray}\rule[-4pt]{1.0\linewidth}{12pt}}}
+\usepackage[framed,numbered]{mcode}
+\usepackage{color}
+\definecolor{light-gray}{gray}{0.80}
+  
+% use {\mono lorem} to set something in monospace
+\newcommand{\mono}[1]{\ttfamily\fontsize{14}{14}\selectfont #1}
+
+% wanna use Metapost?
+\makeatletter
+\newcommand\@ptsize{12}
+\makeatother
+
+\usepackage{mflogo}
+\usepackage{emp}
+
+\DeclareGraphicsRule{*}{mps}{*}{}
+
+
+\title{Introduction to Information Retrieval}   
+\author{Apurv Verma} 
+\date{\today} 
+
+
+%===================================
+\begin{document}
+
+\frame{\titlepage} 
+
+% \frame{\frametitle{Table of contents}\tableofcontents} 
+
+
+%===================================
+
+\frame{\frametitle{}
+	\begin{figure}[ht]
+		\centering{
+			\Large{Traditional IR}
+		}
+	\end{figure}
+}
+
+\section{Introduction} 
+\subsection{Traditional IR}
+
+\frame{\frametitle{Traditional IR} 
+	\begin{itemize}
+		\item Ranking vs Boolean Retrieval\\ \ \\
+		
+		\item Term Frequency\\ \ \\
+		
+		\item tf-idf ranking\\ \ \\
+		
+		\item Vector space model\\ \ \\
+	\end{itemize}
+}
+
+
+\frame{\frametitle{Boolean Retrieval} 
+% 	\begin{figure}[ht]
+% 		\centering{
+% 			\Large Creative Coding
+% 		}
+% 	\end{figure}
+The Boolean Retrieval model is a model for information retrieval where the query is a boolean expression of terms combined with AND, OR \& NOT
+operators. The model views the documents as a set of words.
+}
+
+
+\frame{\frametitle{Term Document Matrix} 
+	\begin{figure}[ht]
+		\centering{
+			\includegraphics[scale=.45]{content/boolean_retrieval_1.png}
+		}
+	\end{figure}
+}
+
+\frame{\frametitle{Sample Queries} 
+We want to run queries like
+\begin{itemize}
+ \item ``Brutus'' AND ``Caesar''
+ \item (``Calpurnia'' AND ``Brutus'') AND ``Caesar''
+ \item (``Brutus'' OR ``Caesar'')
+\end{itemize}
+
+}
+
+
+\frame{\frametitle{How do we do it?} 
+We create a Posting List
+	\begin{figure}[ht]
+		\centering{
+			\includegraphics[scale=.45]{content/boolean_retrieval_2.png}
+		}
+	\end{figure}
+
+}
+
+
+\frame{\frametitle{How do we do it?}
+\begin{itemize}
+ \item Results can be obtained from intersection and union of posting lists.
+ \item Note that the order in which posting lists are accessed can reduce the amount of work
+ \item The general heuristic is to start by intersecting the two smallest posting lists first.
+\end{itemize}
+
+}
+
+
+\frame{\frametitle{Problems with Boolean Retrieval}
+\begin{itemize}
+ \item Documents either match or they don't match
+ \item Boolean Queries result in too few or too many results
+ \item Good for expert users who have the skill to craft a query with manageable number of hits/results.
+\end{itemize}
+}
+
+
+\frame{\frametitle{Ranked Retrieval} 
+ In ranked retrieval we want to rank documents that are more relevant higher than documents that are less relevant. This can be achieved
+ by scoring the query-document pair, say in [0,1]. This score measures how well a query and a document match.
+}
+
+\frame{\frametitle{Jaccard Score} 
+ \begin{itemize}
+ \item Commonly used measure for overlap of two sets. Let A and B be two sets
+ \item $Jaccard(A,B) = A \cap B/ A \cup B$
+ \item Always assigns a number between 0 and 1
+ \item $Jaccard(A,A) = 1$
+ \item $Jaccard(A,B) = 0$ if $A \cap B = 0$
+\end{itemize}
+}
+
+
+\frame{\frametitle{Jaccard Example} 
+ \begin{itemize}
+ \item Query: ``ides of March''
+ \item Document: ``Caesar died in March''
+ \item $Jaccard(q,d) = \frac{1}{6}$
+\end{itemize}
+}
+
+
+\frame{\frametitle{Problems with Jaccard Similarity} 
+ \begin{itemize}
+ \item Doesn't take into account the Frequency of words
+ \item Doesn't take into account the importance of words, intuitively rare words should be more important
+ \item Need a better way to normalize for the length of a document.
+\end{itemize}
+}
+
+
+\frame{\frametitle{tf score} 
+ \begin{itemize}
+ \item Considers documents as bag of words, agnostic to order of words
+ \item Each document is represented as a count vector
+ \item tf measures term Frequency
+ \item A document with 10 occurrences of the term is more relevant than a document with term frequency 1
+ \item But it is not 10 times more relevant, relevance is not proportional to frequency
+\end{itemize}
+}
+
+
+\frame{\frametitle{Bag of words model} 
+	\begin{figure}[ht]
+		\centering{
+			\includegraphics[scale=.25]{content/count_matrix.png}
+		}
+	\end{figure}
+
+}
+
+
+\frame{\frametitle{Log frequency weighting} 
+ \begin{itemize}
+ \item the log freq. of a term t in d is defined as  \[   \left\{
+\begin{array}{ll}
+      1 + log(1 + tf_{t,d}) & tf_{t,d} > 0 \\
+      0 & otherwise \\
+\end{array} 
+\right. \]
+
+ \item Given this, we can compute the tf score for a query-document pair as $tf(q,d) = \sum\limits_{t \in q \cap d}(1 + log(1 + tf_{t,d}))$
+ \item The score is zero is none of the query terms is present in the document
+\end{itemize}
+}
+
+
+\frame{\frametitle{Weight for rare terms} 
+ \begin{itemize}
+ \item We also want to use the frequency of the term in the collection for weighting and ranking
+ \item Rare terms are more informative than frequent terms
+ \item We want low positive weights for frequent terms and high weights for rare terms.
+ \item We will use document frequency to factor this effect
+ \item Document frequency is the number of documents in the collection that the term occurs in
+\end{itemize}
+}
+
+
+\frame{\frametitle{idf score} 
+ \begin{itemize}
+ \item document freq, $df_{t}$, is the number of documents $t$ occurs in
+ \item $df_{t}$ measures the informativeness of term t
+ \item \[idf_{t} = log_{10} \frac{N}{df_{t}} \] where $N$ is the number of documents in the collection
+ \item We use log transformation for both term frequency and document frequency.
+\end{itemize}
+}
+
+
+\frame{\frametitle{tf.idf score} 
+ \begin{itemize}
+ \item Combining the two, the tf-idf score is given by \[ w_{t,d} = (1 + log(1 + tf_{t,d})). log_{10} \frac{N}{df_{t}} \]
+ \item The tf.idf score increases with number of occurrences within a document
+ \item The tf.idf score increases with rarity of terms in the collection
+\end{itemize}
+}
+
+
+\frame{\frametitle{Weight matrix} 
+	\begin{figure}[ht]
+		\centering{
+			\includegraphics[scale=.25]{content/weight_matrix.png}
+		}
+	\end{figure}
+
+}
+
+
+\frame{\frametitle{Vector space model} 
+ \begin{itemize}
+ \item Each document is now represented as real valued vector of tf-idf weights.
+ \item So we have a $V$ dimensional real-valued vector space
+ \item Terms are the axes of the space
+ \item Documents are points or vectors in this space
+ \item These vectors are high-dimensional except that they are sparse - most entries are zero.
+ \item Do the same for queries and represent them as vectors in high dimensional space
+\end{itemize}
+}
+
+
+\frame{\frametitle{Vector Space Similarity} 
+ \begin{itemize}
+ \item Using Euclidean distance?
+ \item Euclidean distance is a bad idea because Euclidean distance is large for vectors of different lengths.
+ \item Instead rank documents by the angle between query and document vectors in vector space
+\end{itemize}
+}
+
+
+\frame{\frametitle{Problem with euclidean distance} 
+	\begin{figure}[ht]
+		\centering{
+			\includegraphics[scale=.25]{content/euclidean_distance.png}
+		}
+	\end{figure}
+
+}
+
+
+\frame{\frametitle{Cosine Similarity} 
+ \begin{itemize}
+ \item The cosine similarity for a query-document pair is given by \[cos(q,d) = \frac{\vec{q}. \vec{d}}{\abs{\vec{q}}.\abs{\vec{d}}}\]
+\end{itemize}
+}
+
+
+\frame{\frametitle{}
+	\begin{figure}[ht]
+		\centering{
+			\Large{Distance Metric Learning}
+		}
+	\end{figure}
+}
+
+
+\frame{\frametitle{Distance Metric Learning}
+
+The underlying theme so far has been to learn a distance measure between two vectors. \\ 
+
+The problem of learning a distance function $D$ for a pair of data points $x$ and $y$ is to learn a mapping function f,
+such that $f(x)$ and $f(y)$ will be in the Euclidean space and $D(x,y) = \norm{f(x) - f(y)} $.
+}
+
+\frame{\frametitle{Distance Metric Learning} 
+	\begin{itemize}
+		\item We provide two illustrative examples belonging to each class\\ \ \\
+		
+		\item Stochastic Neighbor Embedding (Unsupervised)\\ \ \\
+		
+		\item Linear Discriminant Analysis (Supervised)\\ \ \\
+	\end{itemize}
+}
+
+
+\frame{\frametitle{Stochastic Neighbor Embedding} 
+ \begin{itemize}
+ \item Let the pairwise dissimilarities be \[d_{ij} = \frac{\norm{x_i - x_j}^2}{2.\sigma^2}\]where $\sigma$ is an empirically
+ determined scaling factor.
+ \item The probability that $x_i$ picks $x_j$ as its neighbor is \[ p_{ij} = \frac{e^{-d_{ij}^2}}{\sum_{i \neq k} e^{-d_{ik}^2}}\]
+\end{itemize}
+}
+
+
+\frame{\frametitle{Stochastic Neighbor Embedding cont.} 
+ \begin{itemize}
+ \item Similarly in the embedded space, the probability that $x_i$ picks $x_j$ as its neighbor is
+ \[  q_{ij} = \frac{e^{-\norm{y_i - y_j}^2}}{\sum_{i \neq k} e^{-\norm{y_i - y_k}^2}}   \]
+ 
+ \item SNE aims at minimizing \[\sum \limits_{ij} p_{ij}.log \frac{p_{ij}}{q_{ij}} \]
+\end{itemize}
+}
+
+
+\frame{\frametitle{Stochastic Neighbor Embedding cont.} 
+ \begin{itemize}
+ \item Which is equivalent to minimizing \[\sum \limits_{i} KL(P_i || Q_i) \]
+ \item Thus SNE aims at preserving the neighborhood distribution around each data point
+ \item A gradient descent based approach is used to solve this optimization problem
+\end{itemize}
+}
+
+
+\frame{\frametitle{Linear Discriminant Analysis} 
+ \begin{itemize}
+ \item Each datapoint is associated with a class. Suppose there are $C$ different classes.
+ \item LDA defines compactness and scatterness matrices as 
+ \[some \]
+ \[some\]
+\end{itemize}
+}
+
+
+
+
+%===================================
+\section{Content} 
+\subsection{First Content}
+\frame{\frametitle{Some stuff}
+	\begin{itemize}
+		\item Code
+		\item Algorithmen entwerfen
+		\item Parameter \& Codeanpassung
+		\item Archtitektur, Produktdesign
+	\end{itemize} 
+}
+
+
+\frame{\frametitle{API}
+	\begin{itemize}
+		\item 2D / 3D Primitives
+		\item PFont, PImage, \dots{}
+		\item Input, Output\\ \ \\ 
+		
+		\item + enorm viele Librarys
+		\item + viele Beispiele
+	\end{itemize} 
+}
+
+
+
+\begin{frame}[fragile]
+	\frametitle{Some Code}
+
+	\begin{lstlisting}[language=Java, frame=single,
+				% width of the box: linewidth=6.5cm, 
+				basicstyle=\ttfamily\fontsize{10}{12}\selectfont,
+				escapechar=\%]
+		%\Hilight%void setup() 
+		{
+		  size(250, 250); 
+		  smooth();
+		}
+				
+		void draw() 
+		{
+		  background(0);
+		  ellipse(width/2, height/2, 
+		          30, 30);
+		}		
+	\end{lstlisting}	
+\end{frame}
+
+
+\begin{frame}[fragile]
+	\frametitle{Some Code}
+
+	\begin{lstlisting}[language=Java, frame=single,
+				basicstyle=\ttfamily\fontsize{10}{12}\selectfont,
+				escapechar=\%]
+		void setup() 
+		{
+		%\Hilight%  size(250, 250); 
+		  smooth();
+		}
+				
+		void draw() 
+		{
+		  background(0);
+		  ellipse(width/2, height/2, 
+		          30, 30);
+		}		
+	\end{lstlisting}	
+\end{frame}
+
+
+
+\begin{frame}[fragile]
+	\frametitle{\MP}
+	\begin{figure}[ht]
+		\centering{
+			\includegraphics{content/house.mps}
+		}
+	\end{figure}
+\end{frame}
+
+
+\frame{\frametitle{}
+	\begin{figure}[ht]
+		\centering{
+			\Large{\texttt{\$ traceroute}}
+		}
+	\end{figure}
+}
+
+\frame{\frametitle{Was brauchen wir?}
+	\begin{itemize}
+		\item Stream: {\mono traceroute} nach Processing		
+		\item Separater Thread im Hauptprogramm
+	\end{itemize} 
+}
+
+
+\frame{\frametitle{}
+	\begin{figure}[ht]
+		\centering{
+			\Large{Website $\rightarrow$ Dynamische Datenstruktur}
+		}
+	\end{figure}
+}
+
+
+\frame{\frametitle{Wikileaks}
+	\begin{itemize}
+		\item 28. November 2010: Diplomatic cable release
+		\item 2. Dezember 2010: EveryDNS\\ \ \\		
+		
+		\item ``\textit{Wikileaks is currently under heavy attack.}''
+	\end{itemize}
+}
+
+
+%===================================
+\section{The End}
+\frame{\frametitle{Weiterführendes} 
+
+	\begin{block}{Online}
+	\begin{itemize}
+		\item \url{http://processing.org/reference}
+		\item \url{http://nodejs.org}
+	\end{itemize}
+	\end{block}
+
+	\begin{block}{Bücher}
+	\begin{itemize}
+		\item Generative Gestaltung: Entwerfen. Programmieren. Visualisieren.
+		\item The OpenGL Programming Guide
+	\end{itemize}
+	\end{block}
+}
+
+\frame{\frametitle{Software used} 
+	\begin{block}{Umgebung}
+		Mac OS X, vim
+	\end{block}
+
+	\begin{block}{Satz}
+		\LaTeX{} beamer
+	\end{block}
+
+	\begin{block}{Grafiken}
+		METAPOST
+	\end{block}
+	
+	\vfill
+	Slides are available on \url{http://github.com/cmichi}
+}
+
+
+\end{document}
+

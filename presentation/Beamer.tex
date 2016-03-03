@@ -1,0 +1,280 @@
+\documentclass[14pt]{beamer}
+% \useoutertheme{miniframes}
+
+\usepackage{ngerman}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+% \usepackage{amsmath,amsfonts,amssymb}
+\usepackage{url}
+\usepackage{commath}
+
+% disable Navigation at the bottom
+\beamertemplatenavigationsymbolsempty
+
+% page numbers
+% \setbeamertemplate{footline}[frame number]
+% \setbeamertemplate{footline}
+\setbeamertemplate{headline}
+
+% style for source code
+\usepackage{listings}
+\newcommand{\Hilight}{\makebox[0pt][l]{\color{light-gray}\rule[-4pt]{1.0\linewidth}{12pt}}}
+\usepackage[framed,numbered]{mcode}
+\usepackage{color}
+\definecolor{light-gray}{gray}{0.80}
+  
+% use {\mono lorem} to set something in monospace
+\newcommand{\mono}[1]{\ttfamily\fontsize{14}{14}\selectfont #1}
+
+% wanna use Metapost?
+\makeatletter
+\newcommand\@ptsize{12}
+\makeatother
+
+\usepackage{mflogo}
+\usepackage{emp}
+
+\DeclareGraphicsRule{*}{mps}{*}{}
+
+
+\title{Risk Analysis of Skin Cancer using Deep Learning}   
+\author{Matthew May, Stefano Fenu, Thanh Dang, Apurv Verma} 
+\date{\today} 
+
+
+%===================================
+\begin{document}
+
+\frame{\titlepage} 
+
+% \frame{\frametitle{Table of contents}\tableofcontents} 
+
+
+%===================================
+
+\frame{\frametitle{}
+	\begin{figure}[ht]
+		\centering{
+			\Large{Motivation}
+		}
+	\end{figure}
+}
+
+\section{Introduction} 
+\subsection{Motivation}
+
+\frame{\frametitle{Motivation} 
+	\begin{itemize}
+		\item Skin cancer is the most common form of cancer, accounting for 40\% of cases globally. More than 8,500 people
+		in the US are diagnosed with skin cancer everyday.\\ \ \\
+		
+		\item The cure rate is very high with early prognosis. The curability is as high as 92\% if the cancer is detected early.\\ \ \\
+		
+		\item Unfortunate fact of the healthcare system that it spends more in research on expensive treatments for late-stage diseased individuals
+than developing scalable and cost-effective early screening methods.\\ \ \\
+	\end{itemize}
+}
+
+\frame{\frametitle{}
+	\begin{figure}[ht]
+		\centering{
+			\Large{Problem Statement}
+		}
+	\end{figure}
+}
+
+\frame{\frametitle{Problem Statement} 
+	\begin{itemize}
+		\item To build a platform where dermatologists can easily scan through the cancer
+prone patients. The system uses deep learning techniques in the background
+to learn from thousands of images and associates a risk score with each uploaded
+image. The value of the score can be used to differentiate between malign and
+benign cases. We also aim to train a model for multi-class classification among
+the 23 classes of skin cancer.
+	\end{itemize}
+}
+
+
+\frame{\frametitle{}
+	\begin{figure}[ht]
+		\centering{
+			\Large{Design and Approach}
+		}
+	\end{figure}
+}
+
+\frame{\frametitle{Design and Approach} 
+	\begin{itemize}
+		\item Experiment with state of the art image classification models like Google Net, ResNet, Net2Net for classification.
+		\item Build an intuitive web application where patients can upload images of their lesions over time
+		\item The application provides an interface to dermatologists to monitor patients outside clinical settings.
+		\item The application also provides insights from knowledge learnt through thousands of images to suggest high risk patients
+		and similar lesions.
+		\item The dermatologist can call in the patient if it's a high risk case.
+		
+	\end{itemize}
+}
+
+
+
+
+
+
+
+%===================================
+% \section{Content} 
+% \subsection{First Content}
+% \frame{\frametitle{Some stuff}
+% 	\begin{itemize}
+% 		\item Code
+% 		\item Algorithmen entwerfen
+% 		\item Parameter \& Codeanpassung
+% 		\item Archtitektur, Produktdesign
+% 	\end{itemize} 
+% }
+% 
+% 
+% \frame{\frametitle{API}
+% 	\begin{itemize}
+% 		\item 2D / 3D Primitives
+% 		\item PFont, PImage, \dots{}
+% 		\item Input, Output\\ \ \\ 
+% 		
+% 		\item + enorm viele Librarys
+% 		\item + viele Beispiele
+% 	\end{itemize} 
+% }
+% 
+% 
+% 
+% \begin{frame}[fragile]
+% 	\frametitle{Some Code}
+% 
+% 	\begin{lstlisting}[language=Java, frame=single,
+% 				% width of the box: linewidth=6.5cm, 
+% 				basicstyle=\ttfamily\fontsize{10}{12}\selectfont,
+% 				escapechar=\%]
+% 		%\Hilight%void setup() 
+% 		{
+% 		  size(250, 250); 
+% 		  smooth();
+% 		}
+% 				
+% 		void draw() 
+% 		{
+% 		  background(0);
+% 		  ellipse(width/2, height/2, 
+% 		          30, 30);
+% 		}		
+% 	\end{lstlisting}	
+% \end{frame}
+% 
+% 
+% \begin{frame}[fragile]
+% 	\frametitle{Some Code}
+% 
+% 	\begin{lstlisting}[language=Java, frame=single,
+% 				basicstyle=\ttfamily\fontsize{10}{12}\selectfont,
+% 				escapechar=\%]
+% 		void setup() 
+% 		{
+% 		%\Hilight%  size(250, 250); 
+% 		  smooth();
+% 		}
+% 				
+% 		void draw() 
+% 		{
+% 		  background(0);
+% 		  ellipse(width/2, height/2, 
+% 		          30, 30);
+% 		}		
+% 	\end{lstlisting}	
+% \end{frame}
+% 
+% 
+% 
+% \begin{frame}[fragile]
+% 	\frametitle{\MP}
+% 	\begin{figure}[ht]
+% 		\centering{
+% 			\includegraphics{content/house.mps}
+% 		}
+% 	\end{figure}
+% \end{frame}
+% 
+% 
+% \frame{\frametitle{}
+% 	\begin{figure}[ht]
+% 		\centering{
+% 			\Large{\texttt{\$ traceroute}}
+% 		}
+% 	\end{figure}
+% }
+% 
+% \frame{\frametitle{Was brauchen wir?}
+% 	\begin{itemize}
+% 		\item Stream: {\mono traceroute} nach Processing		
+% 		\item Separater Thread im Hauptprogramm
+% 	\end{itemize} 
+% }
+% 
+% 
+% \frame{\frametitle{}
+% 	\begin{figure}[ht]
+% 		\centering{
+% 			\Large{Website $\rightarrow$ Dynamische Datenstruktur}
+% 		}
+% 	\end{figure}
+% }
+% 
+% 
+% \frame{\frametitle{Wikileaks}
+% 	\begin{itemize}
+% 		\item 28. November 2010: Diplomatic cable release
+% 		\item 2. Dezember 2010: EveryDNS\\ \ \\		
+% 		
+% 		\item ``\textit{Wikileaks is currently under heavy attack.}''
+% 	\end{itemize}
+% }
+% 
+% 
+% %===================================
+% \section{The End}
+% \frame{\frametitle{Weiterführendes} 
+% 
+% 	\begin{block}{Online}
+% 	\begin{itemize}
+% 		\item \url{http://processing.org/reference}
+% 		\item \url{http://nodejs.org}
+% 	\end{itemize}
+% 	\end{block}
+% 
+% 	\begin{block}{Bücher}
+% 	\begin{itemize}
+% 		\item Generative Gestaltung: Entwerfen. Programmieren. Visualisieren.
+% 		\item The OpenGL Programming Guide
+% 	\end{itemize}
+% 	\end{block}
+% }
+% 
+% \frame{\frametitle{Software used} 
+% 	\begin{block}{Umgebung}
+% 		Mac OS X, vim
+% 	\end{block}
+% 
+% 	\begin{block}{Satz}
+% 		\LaTeX{} beamer
+% 	\end{block}
+% 
+% 	\begin{block}{Grafiken}
+% 		METAPOST
+% 	\end{block}
+% 	
+% 	\vfill
+% 	Slides are available on \url{http://github.com/cmichi}
+% }
+
+
+\end{document}
+

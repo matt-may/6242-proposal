@@ -1,0 +1,273 @@
+% This is "sig-alternate.tex" V2.1 April 2013
+% This file should be compiled with V2.5 of "sig-alternate.cls" May 2012
+%
+% This example file demonstrates the use of the 'sig-alternate.cls'
+% V2.5 LaTeX2e document class file. It is for those submitting
+% articles to ACM Conference Proceedings WHO DO NOT WISH TO
+% STRICTLY ADHERE TO THE SIGS (PUBS-BOARD-ENDORSED) STYLE.
+% The 'sig-alternate.cls' file will produce a similar-looking,
+% albeit, 'tighter' paper resulting in, invariably, fewer pages.
+%
+% ----------------------------------------------------------------------------------------------------------------
+% This .tex file (and associated .cls V2.5) produces:
+%       1) The Permission Statement
+%       2) The Conference (location) Info information
+%       3) The Copyright Line with ACM data
+%       4) NO page numbers
+%
+% as against the acm_proc_article-sp.cls file which
+% DOES NOT produce 1) thru' 3) above.
+%
+% Using 'sig-alternate.cls' you have control, however, from within
+% the source .tex file, over both the CopyrightYear
+% (defaulted to 200X) and the ACM Copyright Data
+% (defaulted to X-XXXXX-XX-X/XX/XX).
+% e.g.
+% \CopyrightYear{2007} will cause 2007 to appear in the copyright line.
+% \crdata{0-12345-67-8/90/12} will cause 0-12345-67-8/90/12 to appear in the copyright line.
+%
+% ---------------------------------------------------------------------------------------------------------------
+% This .tex source is an example which *does* use
+% the .bib file (from which the .bbl file % is produced).
+% REMEMBER HOWEVER: After having produced the .bbl file,
+% and prior to final submission, you *NEED* to 'insert'
+% your .bbl file into your source .tex file so as to provide
+% ONE 'self-contained' source file.
+%
+% ================= IF YOU HAVE QUESTIONS =======================
+% Questions regarding the SIGS styles, SIGS policies and
+% procedures, Conferences etc. should be sent to
+% Adrienne Griscti (griscti@acm.org)
+%
+% Technical questions _only_ to
+% Gerald Murray (murray@hq.acm.org)
+% ===============================================================
+%
+% For tracking purposes - this is V2.0 - May 2012
+
+\documentclass{sig-alternate-05-2015}
+
+
+\begin{document}
+
+% Copyright
+\setcopyright{acmcopyright}
+%\setcopyright{acmlicensed}
+%\setcopyright{rightsretained}
+%\setcopyright{usgov}
+%\setcopyright{usgovmixed}
+%\setcopyright{cagov}
+%\setcopyright{cagovmixed}
+
+
+% DOI
+\doi{10.475/123_4}
+
+% ISBN
+\isbn{123-4567-24-567/08/06}
+
+%Conference
+% % % % \conferenceinfo{PLDI '13}{June 16--19, 2013, Seattle, WA, USA}
+
+% % % % \acmPrice{\$15.00}
+
+%
+% --- Author Metadata here ---
+% % % % \conferenceinfo{WOODSTOCK}{'97 El Paso, Texas USA}
+%\CopyrightYear{2007} % Allows default copyright year (20XX) to be over-ridden - IF NEED BE.
+%\crdata{0-12345-67-8/90/01}  % Allows default copyright data (0-89791-88-6/97/05) to be over-ridden - IF NEED BE.
+% --- End of Author Metadata ---
+
+\title{Risk Analysis of Skin Cancer using Deep Learning}
+\subtitle{[An Online system to augment clinician's decision making ]
+\titlenote{Work done as part cs-6242 class at Georgia Tech}}
+%
+% You need the command \numberofauthors to handle the 'placement
+% and alignment' of the authors beneath the title.
+%
+% For aesthetic reasons, we recommend 'three authors at a time'
+% i.e. three 'name/affiliation blocks' be placed beneath the title.
+%
+% NOTE: You are NOT restricted in how many 'rows' of
+% "name/affiliations" may appear. We just ask that you restrict
+% the number of 'columns' to three.
+%
+% Because of the available 'opening page real-estate'
+% we ask you to refrain from putting more than six authors
+% (two rows with three columns) beneath the article title.
+% More than six makes the first-page appear very cluttered indeed.
+%
+% Use the \alignauthor commands to handle the names
+% and affiliations for an 'aesthetic maximum' of six authors.
+% Add names, affiliations, addresses for
+% the seventh etc. author(s) as the argument for the
+% \additionalauthors command.
+% These 'additional authors' will be output/set for you
+% without further effort on your part as the last section in
+% the body of your article BEFORE References or any Appendices.
+
+\numberofauthors{4} %  in this sample file, there are a *total*
+% of EIGHT authors. SIX appear on the 'first-page' (for formatting
+% reasons) and the remaining two appear in the \additionalauthors section.
+%
+\author{
+% You can go ahead and credit any number of authors here,
+% e.g. one 'row of three' or two rows (consisting of one row of three
+% and a second row of one, two or three).
+%
+% The command \alignauthor (no curly braces needed) should
+% precede each author name, affiliation/snail-mail address and
+% e-mail address. Additionally, tag each line of
+% affiliation/address with \affaddr, and tag the
+% e-mail address with \email.
+%
+% 1st. author
+\alignauthor
+Ben Trovato\\
+       \affaddr{Institute for Clarity in Documentation}\\
+       \affaddr{1932 Wallamaloo Lane}\\
+       \affaddr{Wallamaloo, New Zealand}\\
+       \email{trovato@corporation.com}
+% 2nd. author
+\alignauthor
+Matthew May\titlenote{Matt's inspiration is his father who was diagnosed with melanoma in 2015}\\
+       \affaddr{Georgia Institute of Technology}\\
+       \email{maym@gatech.edu}
+% 3rd. author
+\alignauthor Lars Th{\o}rv{\"a}ld\\
+       \affaddr{The Th{\o}rv{\"a}ld Group}\\
+       \affaddr{1 Th{\o}rv{\"a}ld Circle}\\
+       \affaddr{Hekla, Iceland}\\
+       \email{larst@affiliation.org}
+\and  % use '\and' if you need 'another row' of author names
+% 4th. author
+\alignauthor Lawrence P. Leipuner\\
+       \affaddr{Brookhaven Laboratories}\\
+       \affaddr{Brookhaven National Lab}\\
+       \affaddr{P.O. Box 5000}\\
+       \email{lleipuner@researchlabs.org}
+}
+
+
+\maketitle
+\begin{abstract}
+Skin cancer is the most common form of cancer, accounting for 40\% of cases globally.
+More than 8,500 people in the US are diagnosed with skin cancer everyday. Melanoma rates in the United States have doubled from 1982 to 2011.
+The survival rate of people with it depends on when they start treatment. The cure rate is very high
+with early prognosis. The curability is as high as 92\% if the cancer is detected early. \cite{prognosticfactors} The prognosis is less favorable 
+if it has spread to other parts of the body.
+Deep convolutional neural networks have led to new breakthroughs in image classification.
+Advancement in neural network frameworks and GPU based computing has allowed us to train deeper and deeper networks.
+We aim to exploit these advancements and apply it to the problem of early skin cancer detection. We achieve an overall accuracy of 90\% for the
+binary classification of malignant and benign skin lesions and an accuracy of 40\% for multi-class cancer type classification.
+
+\end{abstract}
+
+
+
+
+% We no longer use \terms command
+%\terms{Theory}
+
+\keywords{Deep Learning; Neural Networks; Skin-cancer classification}
+
+\section{Introduction}
+After the onset of a lesion patients wait several months for an appointment with the doctor since these are usually
+in the form of mild moles. Dermatologists usually have no way to follow the lesions of their patients over time
+outside their clinic. \\
+In this paper we describe, \url{https://dermfollow.me/}, a system we built to alleviate this problem. Patients can
+use smartphones to upload pictures of their lesions on the website; say, every week. The system uses the knowledge learnt
+from several thousand images using deep neural networks to calculate the risk score for the uploaded image and present the
+most likely cases and high risk patients before the clinician. \\
+We also present the similar images to explain why the neural network considers an image as a high risk case. The clinician can use this added
+information and schedule a speedy appointment with these patients on a priority basis.
+
+
+
+\section{Related Work}
+It is only recently that neural networks have been used for the problem of skin cancer classification. Much of the earlier work focussed
+on extracting features based on image processing techniques to do the classification. In \cite{DBLP:journals/eswa/LeeC15}, Lee and Chen use low
+level feature comparison for detecting different cancer types. In \cite{Kreutz2001}, the authors use a combination of neural networks and 
+sophisticated image processing and feature extraction techniques to achieve a fast and reliable diagnosis. They were able to obtain a 
+90\% correct classification of malignant and benign skin lesions from the DANAOS data collection.
+
+There have also been techniques like \cite{Gniadecka2004443}, \cite{Zhao:15} which combine spectroscopy data with neural networks. These techniques
+are only plausible in a lab setting with appropriate instruments. The novelty of our technique is that it relies solely on image data.
+These images can be captured by an individual using smartphones and does not require any specialized pathology skills. The user could get a reminder
+to upload the image to the website on a periodic basis and the dermatologist could monitor high risk patients easily using our system.\\
+
+The most recent work which is related to our current work was done by Andre, Kuprel and Sebastian Thrun at Stanford. \cite{esteva-skincancer-manuscript}.
+
+
+\section{Approach}
+mention about the neural network used and its salient features
+
+\subsection{Datasets}
+You may want to display math equations in three distinct styles:
+inline, numbered or non-numbered display.  Each of
+the three are discussed in the next sections.
+
+\subsubsection{Tensorflow}
+A formula that appears in the running text is called an
+inline or in-text formula.  It is produced by the
+\textbf{math} environment, which can be
+We use tensorflow \cite{tensorflow2015-whitepaper}
+
+
+\section{Design}
+Mention about salient features and the design choices you made
+
+\subsection{Architecture}
+the overall architecture of the website
+
+
+\section{Experiment and Results}
+asdsd
+
+
+
+
+\section{Conclusions}
+This paragraph will end the body of this sample document.
+Remember that you might still have Acknowledgments or
+Appendices; brief samples of these
+follow.  There is still the Bibliography to deal with; and
+we will make a disclaimer about that here: with the exception
+of the reference to the \LaTeX\ book, the citations in
+this paper are to articles which have nothing to
+do with the present subject and are used as
+examples only.
+%\end{document}  % This is where a 'short' article might terminate
+
+
+%ACKNOWLEDGMENTS are optional
+\section{Acknowledgments}
+This section is optional; it is a location for you
+to acknowledge grants, funding, editing assistance and
+what have you.  In the present case, for example, the
+authors would like to thank Gerald Murray of ACM for
+his help in codifying this \textit{Author's Guide}
+and the \textbf{.cls} and \textbf{.tex} files that it describes.
+
+%
+% The following two commands are all you need in the
+% initial runs of your .tex file to
+% produce the bibliography for the citations in your paper.
+\bibliographystyle{abbrv}
+\bibliography{sigproc}  % sigproc.bib is the name of the Bibliography in this case
+% You must have a proper ".bib" file
+%  and remember to run:
+% latex bibtex latex latex
+% to resolve all references
+%
+% ACM needs 'a single self-contained file'!
+%
+%APPENDICES are optional
+%\balancecolumns
+
+
+
+
+%\balancecolumns % GM June 2007
+% That's all folks!
+\end{document}
