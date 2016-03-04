@@ -59,7 +59,7 @@ networks, image processing, and feature extraction techniques to classify
 skin lesions. Sheha et al. \cite{Sheha_automaticdetection} use a multilayer
 perceptron to classify melanoma, attaining 92\% accuracy on their test set.
 Esteva et al. \cite{esteva-skincancer-manuscript} use an ensemble of
-convolutional neural networks to attain 90\% binary classification
+convolutional neural networks (CNNs) to attain 90\% binary classification
 (malignant/benign).
 
 \section{What's New In Your Approach? Why Will It Succeed?}
@@ -192,12 +192,23 @@ data. Lastly, in final form we intend to provide additional user interface
 enhancements such as patient rewards for uploads and development of the model
 using an ensemble approach.
 
-The tasks are split as follows among the team members. Stefano is focusing on
-model selection, development, and training. Thanh is focused on risk score
-generation for patients and UI design. Matt is building the web application and
-handling integration with the model API. Lastly, Apurv is focused on data
-pre-processing and component integration. All authors have contributed equally
-to this work.
+Thus far, Stefano has led model exploration and training, examining a wide range
+of approaches including simple SVM classifiers (baseline), deep CNNs, and
+pre-trained models. Thanh has developed the user interface and researched
+patient risk scoring. Matt has prepared our training and test datasets,
+secured dermatologist collaborators, and developed the initial web application
+backend. Apurv has done report and presentation generation, and surveyed the
+relevant literature for prior art.
+
+Going forward, the tasks are split as follows among the team members.
+Stefano is focusing on model selection, development, and training (100 hours).
+Thanh is focused on risk score generation for patients, UI design, and user
+studies (100 hours). Matt is building the web application and handling
+integration with the model API (100 hours), as well as interfacting with our
+dermatologist collaborators. Lastly, Apurv is focused on data pre-processing,
+component integration, and report and presentation development (100 hours). All
+authors have contributed and will contributed equally in the future to this
+work.
 
 \bibliographystyle{abbrv}
 \bibliography{proposal}  % sigproc.bib is the name of the Bibliography in this case
