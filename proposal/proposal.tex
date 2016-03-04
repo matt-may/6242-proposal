@@ -1,4 +1,4 @@
-\documentclass[a4paper,10pt]{article}
+\documentclass[a4paper,12pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[colorlinks]{hyperref}
 \usepackage{epstopdf}
@@ -9,204 +9,137 @@
 }
 \usepackage[all]{hypcap}
 
-%opening
-\title{Risk Analysis of Skin Cancer using Deep Learning}
+\title{DermFollow: A System For Better Patient Follow-Up In Dermatology}
 \author{Thanh Dang, Stefano Fenu, Matthew May, Apurv Verma}
 
 \begin{document}
 
 \maketitle
 
-\begin{abstract}
-Skin cancer is the most common form of cancer, accounting for 40\% of cases
-globally. More than 8,500 people in the US are diagnosed with skin cancer every
-day. The survival rate of individuals is dependent on when they start treatment,
-and is very high with early treatment. The initial step in the diagnosis of
-skin cancer is visual inspection by a trained health care provider. Building on
-recent breakthroughs in deep convolutional neural networks, which have proven
-to be effective at image classification, we aim to develop a system that
-assists dermatology health care providers in following up with their patients.
-By providing classification of suspected skin cancer lesions, patient risk
-scoring, and patient image management, our system will allow dermatologists
-to more effectively manage their patients. This could lead to improved patient
-outcomes, enhanced patient satisfication, and streamlined medical practice
-management.
-\end{abstract}
-
 \section{What Are You Trying To Do?}
-Our goal is to build a website that allows dermatologists to more effectively
-follow up with patients with skin cancer, or patients at risk for skin cancer.
-Our website will do this by providing classification of suspected skin cancer
+Our goal is to build a Web-based system that allows dermatologists to more
+effectively follow up with patients that have, or are at risk for, skin cancer.
+Our system will do this by providing classification of suspected skin cancer
 lesions, patient risk scoring, and patient image analysis over time. Ultimately,
-we hope to improve outcomes, promote happier patients, and improve medical
-practice.
+we hope to improve patient outcomes, raise patient satisfaction, and improve
+the efficiency of medical practice.
 
 \section{How Is It Done Today?}
 The current state-of-the-art for automated skin cancer analysis generally
 involves feature detection \cite{DBLP:journals/eswa/LeeC15}. In dermatology,
-there is a widely used ABCDE (Asymmetry, Border, Color, Diameter, Evolving)
-\cite{thomas1998semiological} algorithm that is used by doctors to assess
-potential skin cancer lesions. Existing approaches often attempt to imitate this
-algorithm by ``teaching'' models how to detect the same features
+there is a widely used ABCDE \cite{thomas1998semiological} algorithm that is
+used by doctors to assess potential skin cancer lesions. Existing approaches
+often attempt to imitate this algorithm via detection of the same features
 \cite{zagrouba2004prelimary}. However, the limitation of many of these models
-has been verification on a relatively small, highly curated test set of images,
-leading to low-quality results on broader image sets and limited adoption in
-clinical practice.
+has been low-quality results on the more diverse images actually encountered
+in practice, limiting adoption.
 
 Relatively recently, neural networks have been applied to skin cancer
 classification. In \cite{Kreutz2001}, the authors use a combination of neural
-networks, image processing, and feature extraction techniques to classify
-skin lesions. Sheha et al. \cite{Sheha_automaticdetection} use a multilayer
-perceptron to classify melanoma, attaining 92\% accuracy on their test set.
-Esteva et al. \cite{esteva-skincancer-manuscript} use an ensemble of
-convolutional neural networks (CNNs) to attain 90\% binary classification
-(malignant/benign).
+networks and feature extraction to classify skin lesions. Sheha et al.
+\cite{Sheha_automaticdetection} use a multilayer perceptron to classify
+melanoma, attaining 92\% accuracy. Esteva et al.
+\cite{esteva-skincancer-manuscript} use an ensemble of convolutional neural
+networks (CNNs) to attain 90\% binary classification (malignant/benign).
+While these results are promising, many of these models were trained on images
+that lack histological (microscopic) verification, the gold standard for
+determining malignancy.
 
 \section{What's New In Your Approach? Why Will It Succeed?}
-The primary limitation of current automated approaches has been limited
-applicability to actual clinical practice. Low patient engagement, limited
-integration into clinical workflows, poor algorithm performance on actual
-patient images, and expensive hardware requirements have plagued existing
-approaches.
+Low patient engagement, limited integration into clinical workflows, poor
+algorithm performance on actual patient images, and expensive hardware
+requirements have plagued existing approaches.
 
-To increase patient engagement, our system will present an interface in which
-patients receive rewards for uploading images of their skin lesions
-over time, providing an incentive for patient compliance with their treatment
-plan.
+To increase patient engagement, our system will provide patients rewards for
+uploading images of their lesions over time, providing an incentive for
+compliance.
 
-Due to the recent adoption of electronic medical records (EMR), our Web-based
-system will easily integrate with existing clinical workflows, which are
-increasingly electronic. Our system will perform analysis on uploaded patient
-images and then present the results to the physician in a meaningful,
-uncluttered way, allowing immediate follow-up with the patient if necessary.
+Our system will integrate easily with existing electronic clinical workflows.
+It will perform analysis on uploaded patient images and then present the results
+to the physician in an uncluttered way, allowing immediate patient follow-up.
 
-To improve algorithm performance, we will use state-of-the-art convolutional
-neural networks, which have been shown to be highly effective
-\cite{krizhevsky2012imagenet} at difficult image classification problems.
-Furthermore, by allowing patients to upload images of their skin lesions from
-their smartphone or computer, there will be no additional hardware purchase
-required of the patient or physician.
+To improve algorithm performance, we will use state-of-the-art CNNs, which have
+been shown to be very effective at image classification
+\cite{krizhevsky2012imagenet}. By allowing patients to upload images from
+their smartphone, no additional hardware will be required. Lastly, we use
+datasets for training and testing with 100\% histological verification.
 
 \section{Who Cares?}
-In the literature, it has been shown that the implementation of health care
-IT can lead to significant increases in patient satisfaction
-\cite{roham2012predicting}. It has also been shown that the experience of the
-patient in receiving care is related to overall patient
-satisfaction \cite{bjertnaes2012overall}. Patient satisfaction is one of the
-primary metrics now considered an indicator of overall health care quality by
-physicians and hospital administrators \cite{fenton2012cost}.
+It has been shown that health care IT can lead to significant increases in
+patient satisfaction \cite{roham2012predicting}. Patient satisfaction is one of
+the primary metrics now considered an indicator of health care quality by
+hospitals \cite{fenton2012cost}, \cite{bjertnaes2012overall}.
 
-By allowing patients to receive a higher standard of care through the use of
-unobtrusive technology, we believe patient satisfaction will grow.
-Furthermore, it has been shown that telemedicine technology, which this could be
-considered a form of, is effective and increases patient access to care
-\cite{hilty2013effectiveness}. It also allows for more efficient use of
-resources, as physicians can interact with their patients in an asynchronous
-fashion.
-
-In our research, we have often heard that physicians are frustrated by
-non-compliant patients. By creating a communication tool that connects the
-physician with his patients, and provides meaningful data that supports
-patient follow-up, we believe patient outcomes, as well as patient satisfaction
-will be improved.
+By allowing patients to receive a higher standard of care through technology, we
+believe patient satisfaction will grow. The literature has shown that
+telemedicine technology is effective \cite{hilty2013effectiveness}. By providing
+physicians with meaningful data and analysis, we believe patient outcomes and
+satisfaction will increase.
 
 \section{What Difference Will It Make?}
-To determine whether our proposed approach would have utility in practice, we
-spoke with dermatologists at Stanford Medical Center and Emory University. One
-common thread that we heard was that patient follow-up is a process that has
-significant gaps. Patients see their dermatologist at six-month, or in some
-cases, multi-year intervals, and have little to no contact with their physician
-in between. This creates large time periods where skin lesions continue to
-change, but there is little or no supervision of their progress.
+To determine whether our approach would have utility in practice, we spoke with
+several dermatologists. One common thread was that patient follow-up is limited.
+Patients see their dermatologist infrequently. This creates large time periods
+where skin lesions continue to change, but there is no supervision.
 
-Our system will enable follow-up on a consistent basis when the patient is not
-physically in the office, potentially allowing cancerous lesions to be caught
-at a much earlier time. Furthermore, by analyzing skin lesions over time, we
-will be able to generate risk profiles for each patient, increasing the
-quality of clinical decisionmaking. And by allowing the physician to instantly
-``ping'' the patient to schedule an appointment after a questionable lesion
-is uploaded, our system will promote more frequent patient follow-up when
-necessary.
+Our system will enable consistent follow-up, potentially allowing cancerous
+lesions to be caught earlier. By analyzing lesions over time, we will generate
+risk profiles for each patient, bettering clinical decisionmaking. By allowing
+the physician to schedule an appointment with a patient after a questionable
+lesion is uploaded, our system will promote better patient follow-up.
 
 \section{What Are the Risks and Payoffs?}
 
 \subsection{Risks}
-As with any technology, there are certain risks that should be considered.
-First, dermatologists may be hesistant to adopt our technology because in
-certain reimbursement schemes, physicians are compensated primarily when
-patients come for in-person office visits. If our system leads to a decrease
-in patient visits because of more effective patient management, this could
-slow adoption. To mitigate this, we should focus on health care systems with
-positive incentives for managing patients more effectively.
-
-Secondly, the recent widespread adoption of electronic medical records is
-a relatively costly and complex procedure that can be frustrating for
-physicians \cite{boonstra2014implementing}. Thus, some medical practices may
-be saturated with technology and unwilling to adopt additional technologies.
-Lastly, on a more technical note, the relatively small size of our image
-datasets used for training and testing could promote overfitting, leading
-to suboptimal results when applied to patient imaging in practice.
+Dermatologists may be hesistant to adopt our technology because in certain
+reimbursement schemes, physicians are incentivized only to see the
+patient in the office. If our system leads to a decrease in patient visits,
+this could slow adoption. Thus, we should focus on hospitals with positive
+incentives. Secondly, the ``saturation'' of technology in medicine
+\cite{boonstra2014implementing} could mean physicians are unwilling to adopt
+additional technology.
 
 \subsection{Payoffs}
-The scalability of our system, and the relatively low cost that it could be
-offered to medical practices at, means that it could feasibly be deployed to a
-wide range of clinical settings, having a large impact on the quality of medical
-care. Ultimately, better patient follow-up could mean that patient outcomes are
-improved (i.e., lives saved), practices are managed more effectively, and
-patients are more satisfied with the care they've received, making them more
-likely to return.
+The scalability of our system means that it could be deployed to a wide range
+of settings, having a large impact on the quality of care. Ultimately, better
+patient follow-up could mean that patient outcomes are improved (i.e., lives
+saved), practices are managed better, and patients are more satisfied.
 
 \section{How Much Will It Cost? How Long Will It Take?}
-Our approach leverages open-source technology and also a novel technique known
-as \textit{transfer learning} \cite{razavian2014cnn}, in which a pre-trained
-network is used at the initial basis for feature learning. Thus, we are able to
-produce a minimally viable product at relatively low cost. More specifically,
-our primary costs are in training neural networks, which are done at a cost of
-$\sim$\$0.65/hour on Amazon EC2 dedicated GPU instances. For our initial model
-development and training, we estimate approximately 150 hours of instance
+Initially, our primary costs are in training neural networks. For our initial
+model development, we estimate approximately 150 hours of Amazon instance
 utilization ($\sim$\$100 total). Our website will run on a t2.micro instance on
-Amazon EC2, which is free under a promotion. If the promotion were to expire,
-we estimate we could operate the server initially at $\sim$\$0.013/hour, or
-about \$10/month.
+Amazon, which is free under a promotion.
 
 We rely on freely available technologies such as Python, NumPy, TensorFlow
 \cite{tensorflow2015-whitepaper}, Caffe \cite{jia2014caffe}, and Ruby on Rails
 for the development of our system. From a human resource perspective, we intend
 to collectively spend 400 total hours on the project, split amongst model
-development, neural network training, user interface development, and user
-studies, which can be estimated at $\sim$\$40,000 in opportunity cost with
-each of our time valued at an average of \$100/hour.
+development, user interface and web application development, user studies,
+and report generation, which can be estimated at $\sim$\$40,000 in opportunity
+cost with each hour of our time valued at \$100/hour.
 
 \section{How Will Progress Be Measured?}
-To measure our progress, we have recruited dermatologists from two leading
-institutions, to test our demonstration system and provide feedback from a
-clinical perspective. Moreover, we intend to perform simple user studies/focus
-groups in which we recruit patients to use our system and offer feedback on
-their experience and the likelihood they would use it in reality.
+To measure our progress, we have recruited dermatologists to test our
+demonstration system and provide clinical feedback. Moreover, we intend to
+perform user studies/focus groups in which patients use our system and offer
+feedback. We will administer Likert-scale surveys and analyze results.
 
-From a more technical perspective, we aim to achieve at least 90\% in binary
-skin cancer classification on our test image set. Another checkpoint is the
-launch of our application as a minimal product in which patients can upload
-images and their physician can view them as a stream and interact with the
-data. Lastly, in final form we intend to provide additional user interface
-enhancements such as patient rewards for uploads and development of the model
-using an ensemble approach.
+We aim to achieve $\geq$90\% in binary skin cancer classification on our test
+set. Another checkpoint is the version one application in which patients can
+upload images and their physician can view them and interact with the data.
+Lastly, in final form there will be patient rewards and an optimized model.
 
-Thus far, Stefano has led model exploration and training, examining a wide range
-of approaches including simple SVM classifiers (baseline), deep CNNs, and
-pre-trained models. Thanh has developed the user interface and researched
-patient risk scoring. Matt has prepared our training and test datasets,
-secured dermatologist collaborators, and developed the initial web application
-backend. Apurv has done report and presentation generation, and surveyed the
-relevant literature for prior art.
+Thus far, Stefano has led model exploration, examining SVM, CNNs, and
+pre-trained models \cite{razavian2014cnn}. Thanh has developed the UI and
+patient risk scoring. Matt has gathered/cleaned datasets, secured dermatologist
+collaborators, and developed the web application. Apurv has done report and
+presentation generation.
 
-Going forward, the tasks are split as follows among the team members.
-Stefano is focusing on model selection, development, and training (100 hours).
-Thanh is focused on risk score generation for patients, UI design, and user
-studies (100 hours). Matt is building the web application and handling
-integration with the model API (100 hours), as well as interfacting with our
-dermatologist collaborators. Lastly, Apurv is focused on data pre-processing,
-component integration, and report and presentation development (100 hours). All
+Future tasks are split as follows. Stefano is focusing on model development and
+training (100 hours). Thanh is focused on risk score generation, UI design, and
+user studies (100 hours). Matt is building the web application (100 hours).
+Apurv is focused on data management and report development (100 hours). All
 authors have contributed and will contributed equally in the future to this
 work.
 
